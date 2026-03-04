@@ -1,5 +1,5 @@
-multithread: src/multithread.c
-	gcc -o multithread src/multithread.c
+multithread: src/main.c
+	gcc -o main src/main.c
 
 clean:
-	rm -f multithread
+	rm -f main
