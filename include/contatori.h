@@ -1,14 +1,15 @@
 #ifndef CONTATORI_H
 #define CONTATORI_H
 
-typedef struct 
+typedef struct
 {
-    FILE *fp;
+    char *nome_file_in;
+    char *nome_file_out;
 
-    long vocal_number;
-    long consonant_number;
-    long punct_number;
-    long printable_number;
+    unsigned int vocal_number;
+    unsigned int consonant_number;
+    unsigned int punct_number;
+    unsigned int printable_number;
 } Conteggi;
 
 void* vocals_counter(void* arg);
