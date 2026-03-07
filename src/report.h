@@ -1,5 +1,5 @@
-#ifndef CONTATORI_H
-#define CONTATORI_H
+#ifndef REPORT_H
+#define REPORT_H
 
 void* print_report(void* arg);
 
