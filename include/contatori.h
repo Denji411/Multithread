@@ -6,6 +6,7 @@ typedef struct
     char *nome_file_in;
     char *nome_file_out;
 
+    unsigned int file_length;
     unsigned int vocal_number;
     unsigned int consonant_number;
     unsigned int punct_number;

@@ -9,6 +9,5 @@
 void* print_report(void* arg) {
     Conteggi *c = (Conteggi*)arg;
     
-    
     pthread_exit(NULL);
 }
