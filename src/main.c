@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <string.h>                                                                                 
 
 #include "contatori.h"
 #include "report.h"
@@ -9,14 +10,33 @@
 #define NUM_threads 5
 
 int main(int argc, char *argv[]) {
-    if (argc != 2) {
+    if (argc < 2) {
         printf("Numero di argomenti non valido.\n");
         return EXIT_FAILURE;
+    } else if (argc > 2) {
+        printf("Utilizzo %s\n", argv[1]);
     }
     
     pthread_t thread[NUM_threads];
     Conteggi *c = malloc(sizeof(Conteggi));
     c -> nome_file_in = "resources/file.txt";
+    
+    // analisi nome del file e prevenzione formato errato
+    char *point = strchr(argv[1], '.');
+    if (point != NULL) {    // sostituisco tutti i punti con \0
+        *point = '\0';
+    }
+
+    int length = strlen(argv[1] + 3 + 1);   // dimensione argv[1] + .md + \0
+    char *file_name = malloc(length * sizeof(char));
+
+    if (file_name != NULL) {
+        strcpy(file_name, argv[1]);
+        strcat(file_name, ".md");
+    }
+
+    c -> nome_file_out = file_name;
+    printf("%s\n", file_name);
 
     pthread_create(&thread[0], NULL, vocals_counter, c);
     pthread_create(&thread[1], NULL, consonants_counter, c);
@@ -33,6 +53,7 @@ int main(int argc, char *argv[]) {
     pthread_create(&thread[4], NULL, print_report, c);
     pthread_join(thread[4], NULL);
 
+    free(file_name);
     free(c);
     return EXIT_SUCCESS;
 }
