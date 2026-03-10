@@ -27,12 +27,11 @@ int main(int argc, char *argv[]) {
         *point = '\0';
     }
 
-    int length = strlen(argv[1] + 3 + 1);   // dimensione argv[1] + .md + \0
+    int length = strlen(argv[1]) + 7 + 3 + 1;   // dimensione output/ + argv[1] + .md + \0
     char *file_name = malloc(length * sizeof(char));
 
     if (file_name != NULL) {
-        strcpy(file_name, argv[1]);
-        strcat(file_name, ".md");
+        snprintf(file_name, length, "output/%s.md", argv[1]);
     }
 
     c -> nome_file_out = file_name;

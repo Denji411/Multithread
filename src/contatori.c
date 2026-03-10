@@ -17,7 +17,7 @@ void* vocals_counter(void* arg) {
     }
     
     unsigned int local_counter = 0;
-    char reader[256];
+    char reader[255];
 
     while(fgets(reader, sizeof(reader), fp) != NULL) {
         for(int i = 0; reader[i] != '\0'; i++) {
@@ -28,7 +28,7 @@ void* vocals_counter(void* arg) {
         }
     }
 
-    pthread_mutex_lock(&mutex);
+    pthread_mutex_lock(&mutex); // non necessario perchè, anche se modificano la stessa memoria condivisa, non modificano la stessa variabile contemporaneamente (commento inserito per chiarezza)
     c -> vocal_number = local_counter;
     pthread_mutex_unlock(&mutex);
 
@@ -46,7 +46,7 @@ void* consonants_counter(void* arg) {
     }
     
     unsigned int local_counter = 0;
-    char reader[256];
+    char reader[255];
 
     while(fgets(reader, sizeof(reader), fp) != NULL) {
         for(int i = 0; reader[i] != '\0'; i++) {
@@ -75,7 +75,7 @@ void* punct_counter(void* arg) {
     }
     
     unsigned int local_counter = 0;
-    char reader[256];
+    char reader[255];
 
     while(fgets(reader, sizeof(reader), fp) != NULL) {
         for(int i = 0; reader[i] != '\0'; i++) {
@@ -105,7 +105,7 @@ void* printable_counter(void* arg) {
     
     unsigned int local_counter = 0;
     unsigned int local_length_counter = 0;
-    char reader[256];
+    char reader[255];
 
     while(fgets(reader, sizeof(reader), fp) != NULL) {
         for(int i = 0; reader[i] != '\0'; i++) {
