@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
-#include <string.h>                                                                                 
+#include <string.h>  
+#include <time.h>                                                                               
 
 #include "contatori.h"
 #include "report.h"
@@ -10,6 +11,10 @@
 #define NUM_threads 5
 
 int main(int argc, char *argv[]) {
+    struct tm *ptr;
+    time_t t = time(NULL);
+    ptr = localtime(&t);
+    
     if (argc < 2) {
         printf("Numero di argomenti non valido.\n");
         return EXIT_FAILURE;
@@ -19,6 +24,7 @@ int main(int argc, char *argv[]) {
     
     pthread_t thread[NUM_threads];
     Conteggi *c = malloc(sizeof(Conteggi));
+    c -> ptr = ptr;
     c -> nome_file_in = "resources/file.txt";
     
     // analisi nome del file e prevenzione formato errato

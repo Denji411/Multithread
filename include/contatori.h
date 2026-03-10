@@ -3,6 +3,8 @@
 
 typedef struct
 {
+    struct tm *ptr;
+
     char *nome_file_in;
     char *nome_file_out;
 
